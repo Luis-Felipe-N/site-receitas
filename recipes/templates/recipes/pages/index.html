@@ -3,6 +3,9 @@
 {% block title %}Home :: {% endblock title %}
 
 {% block content %}
-    {% include '../partials/recipes.html' %}
-    {% include '../partials/recipes.html' %}
+    <div class="content-cards">
+        {% for recipe in recipes %}
+            {% include '../partials/recipes.html' %}
+        {% endfor %}
+    </div>
 {% endblock content %}
