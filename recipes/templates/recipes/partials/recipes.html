@@ -1,21 +1,33 @@
-<div class="card">
+    <div class="card">
     <img class="card__img" src="{{ recipe.cover.url }}" alt="">
-    <a href="{% url 'recipes' 1 %}">
+    <a href="{% url 'recipes' recipe.id %}">
         <h2 class="card__title">{{ recipe.title|capfirst }}</h2>
     </a>
     <div class="card__author">
+        {% if recipe.author %}
+            <span class="card__author-items">
+                <i class="fas fa-user"></i>                
+                {% if recipe.author.first_name %}
+                    {{ recipe.author.first_name }}
+                {% else %}
+                    {{ recipe.author.username }}
+                {% endif %}
+            </span>
+        {% else %}
+            Desconhecido
+        {% endif %}
         <span class="card__author-items">
-            <i class="fas fa-user"></i>
-            {{ recipe.author.first_name }}
-        </span><span class="card__author-items">
             <i class="fas fa-calendar"></i>
-            {{ recipe.created_at|date:"d/m/Y" }}
-        </span><span class="card__author-items">
-            <a href="">
+            {{ recipe.create_at|date:"d/m/Y" }}
+        </span>
+        {% if recipe.category %}
+        <span class="card__author-items">
+            <a href="{% url 'category' recipe.category.id %}">
                 <i class="fas fa-layer-group"></i>
                 {{ recipe.category }}
             </a>
         </span>
+        {% endif %}
     </div>
 
     <p class="card__text">
@@ -48,7 +60,7 @@
 
     {% if is_details is not True %}
         <div class="card__more">
-            <a href="{% url 'recipes' 1 %}">
+            <a href="{% url 'recipes' recipe.id %}">
                 ver mais...
             </a>
         </div>

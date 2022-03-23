@@ -58,7 +58,8 @@ class Recipe(models.Model):
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
+        blank=True
     )
 
     author = models.ForeignKey(
@@ -66,4 +67,7 @@ class Recipe(models.Model):
           on_delete=models.SET_NULL,
         null=True        
     )
-
+    
+    def __str__(self):
+        return self.title
+    
