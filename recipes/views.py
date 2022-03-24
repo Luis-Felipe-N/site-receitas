@@ -14,15 +14,22 @@ def home(request):
 
 def category(request, category_id):
 
-    recipe = get_list_or_404(Recipe.objects.filter(category__id=category_id, is_published=True).order_by('create_at'))
+    recipe = get_list_or_404(
+            Recipe.objects.filter(category__id=category_id, is_published=True).order_by('create_at')
+        )
 
+    category_name = recipe[0].category
 
     context = {
         "recipes": recipe,
-        "category":  recipe[0].category
+        "category":  category_name
     }
 
-    return render(request, 'recipes/pages/category.html', context)
+    
+    return render(request, 'recipes/pages/category.html', context, status=404)
+
+
+
 
 def recipe(request, id):
 

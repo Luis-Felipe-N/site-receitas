@@ -1,8 +1,10 @@
     <div class="card">
     <img class="card__img" src="{{ recipe.cover.url }}" alt="">
-    <a href="{% url 'recipes' recipe.id %}">
-        <h2 class="card__title">{{ recipe.title|capfirst }}</h2>
-    </a>
+    <h2 class="card__title">
+        <a href="{% url 'recipes' recipe.id %}">
+            {{ recipe.title|capfirst }}
+        </a>
+    </h2>
     <div class="card__author">
         {% if recipe.author %}
             <span class="card__author-items">
@@ -69,7 +71,11 @@
 
     {% if is_details %}
         <div class="card__steps">
-            {{ recipe.preparation_steps|linebreaksbr }}
+            {% if recipe.preparation_steps_is_html is True %}
+                {{ recipe.preparation_steps|safe }}
+            {% else %}
+                {{ recipe.preparation_steps|linebreaksbr }}q
+            {% endif %}
         </div>
     {% endif %}
     

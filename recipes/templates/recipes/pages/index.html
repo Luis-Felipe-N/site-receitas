@@ -6,6 +6,8 @@
     <div class="content-cards">
         {% for recipe in recipes %}
             {% include '../partials/recipes.html' %}
+        {% empty %}
+            Ainda não há receitas, que tal criar uma?
         {% endfor %}
     </div>
 {% endblock content %}
