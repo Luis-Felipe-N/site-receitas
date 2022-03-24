@@ -1,0 +1,15 @@
+{% extends 'global/base.html' %}
+
+{% block title %}
+    {{ category }} ::
+{% endblock title %} 
+
+{% block content %}
+    <div class="content-cards">
+        {% for recipe in recipes %}
+            {% include '../partials/recipes.html' %}        
+        {% empty %}
+            <h1>Não há categorias aqui ;(</h1>
+        {% endfor %}
+    </div>
+{% endblock content %}
